@@ -1,10 +1,4 @@
 #%%
-from pathlib import Path
-import sys
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(PROJECT_ROOT))
-
 from polygon_triangulation.algorithms import greedy_triangulation
 from polygon_triangulation.dataset import (
     load_dataset,
@@ -31,4 +25,3 @@ for index, entry in enumerate(load_dataset(VERTEX_COUNT)):
     if SHOW_PLOTS:
         reference.draw()
         greedy.draw()
-
