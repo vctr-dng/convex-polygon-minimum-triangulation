@@ -9,7 +9,6 @@ from .algorithms import minimum_exhaustive_triangulation
 from .geometry import Polygon, Vertex
 from .triangulation import Triangulation
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DATASET_DIRECTORY = PROJECT_ROOT / "dataset"
 

@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import json
-from math import cos, pi, sin
-from typing import Iterable, Sequence
 import random
+from collections.abc import Iterable, Sequence
+from dataclasses import dataclass
+from math import cos, pi, sin
 
 
 @dataclass(frozen=True)
@@ -12,7 +12,7 @@ class Vertex:
     x: float
     y: float
 
-    def distance_to(self, other: "Vertex", p: int = 2) -> float:
+    def distance_to(self, other: Vertex, p: int = 2) -> float:
         if p <= 0:
             raise ValueError("The Minkowski norm must be positive.")
         return (abs(self.x - other.x) ** p + abs(self.y - other.y) ** p) ** (1 / p)
@@ -24,7 +24,7 @@ class Vertex:
         return json.dumps(self.dump(), indent=4)
 
     @classmethod
-    def from_json(cls, value: str) -> "Vertex":
+    def from_json(cls, value: str) -> Vertex:
         point = json.loads(value)
         if not isinstance(point, list) or len(point) != 2:
             raise ValueError("A vertex must be a two-value JSON list.")
@@ -88,14 +88,14 @@ class Polygon:
         return json.dumps(self.dump(), indent=4)
 
     @classmethod
-    def from_json(cls, value: str) -> "Polygon":
+    def from_json(cls, value: str) -> Polygon:
         points = json.loads(value)
         if not isinstance(points, list):
             raise ValueError("A polygon must be a JSON list of vertices.")
         return cls(Vertex(point[0], point[1]) for point in points)
 
     @classmethod
-    def regular(cls, radius: float, vertex_count: int) -> "Polygon":
+    def regular(cls, radius: float, vertex_count: int) -> Polygon:
         if radius <= 0:
             raise ValueError("The radius must be positive.")
         return cls(
@@ -107,7 +107,7 @@ class Polygon:
         )
 
     @classmethod
-    def random(cls, radius: float, vertex_count: int) -> "Polygon":
+    def random(cls, radius: float, vertex_count: int) -> Polygon:
         if radius <= 0:
             raise ValueError("The radius must be positive.")
         angles = sorted(random.uniform(0, 2 * pi) for _ in range(vertex_count))
@@ -174,7 +174,7 @@ class Chord:
         return json.dumps(self.dump(), indent=4)
 
     @classmethod
-    def from_json(cls, value: str, polygon: Polygon) -> "Chord":
+    def from_json(cls, value: str, polygon: Polygon) -> Chord:
         indices = json.loads(value)
         if not isinstance(indices, list) or len(indices) != 2:
             raise ValueError("A chord must be a two-index JSON list.")

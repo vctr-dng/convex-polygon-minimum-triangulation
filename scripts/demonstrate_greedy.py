@@ -1,4 +1,4 @@
-#%%
+# %%
 from polygon_triangulation.algorithms import greedy_triangulation
 from polygon_triangulation.dataset import (
     load_dataset,
@@ -6,8 +6,7 @@ from polygon_triangulation.dataset import (
     triangulation_from_entry,
 )
 
-
-#%%
+# %%
 VERTEX_COUNT = 7
 SHOW_PLOTS = True
 
