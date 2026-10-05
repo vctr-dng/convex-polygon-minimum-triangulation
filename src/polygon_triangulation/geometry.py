@@ -91,7 +91,7 @@ class Polygon:
     def from_json(cls, value: str) -> Polygon:
         points = json.loads(value)
         if not isinstance(points, list):
-            raise ValueError("A polygon must be a JSON list of vertices.")
+            raise TypeError("A polygon must be a JSON list of vertices.")
         return cls(Vertex(point[0], point[1]) for point in points)
 
     @classmethod

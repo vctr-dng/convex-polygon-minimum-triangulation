@@ -19,7 +19,7 @@ def load_dataset(
     path = directory / f"{vertex_count}.json"
     entries = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(entries, list):
-        raise ValueError(f"Dataset {path} must contain a JSON list.")
+        raise TypeError(f"Dataset {path} must contain a JSON list.")
     return entries
 
 

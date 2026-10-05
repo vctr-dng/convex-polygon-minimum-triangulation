@@ -62,7 +62,7 @@ class Triangulation:
     def from_json(cls, value: str, polygon: Polygon) -> Triangulation:
         chords = json.loads(value)
         if not isinstance(chords, list):
-            raise ValueError("A triangulation must be a JSON list of chords.")
+            raise TypeError("A triangulation must be a JSON list of chords.")
         triangulation = cls(polygon)
         for indices in chords:
             if not isinstance(indices, list) or len(indices) != 2:
