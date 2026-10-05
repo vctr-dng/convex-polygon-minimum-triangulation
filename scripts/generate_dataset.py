@@ -1,8 +1,7 @@
-#%%
+# %%
 from polygon_triangulation.dataset import append_entry, generate_entry
 
-
-#%%
+# %%
 MIN_VERTEX_COUNT = 4
 MAX_VERTEX_COUNT = 9
 SAMPLES_PER_SIZE = 10

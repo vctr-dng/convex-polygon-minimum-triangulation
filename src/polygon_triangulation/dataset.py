@@ -9,7 +9,6 @@ from .algorithms import minimum_exhaustive_triangulation
 from .geometry import Polygon, Vertex
 from .triangulation import Triangulation
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DATASET_DIRECTORY = PROJECT_ROOT / "dataset"
 
@@ -20,7 +19,7 @@ def load_dataset(
     path = directory / f"{vertex_count}.json"
     entries = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(entries, list):
-        raise ValueError(f"Dataset {path} must contain a JSON list.")
+        raise TypeError(f"Dataset {path} must contain a JSON list.")
     return entries
 
 

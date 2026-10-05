@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from typing import Iterable
+from collections.abc import Iterable
 
 from .geometry import Chord, Polygon
 
@@ -20,7 +20,7 @@ class Triangulation:
                     "The supplied chords do not form a valid triangulation prefix."
                 )
 
-    def copy(self) -> "Triangulation":
+    def copy(self) -> Triangulation:
         return Triangulation(self.polygon, self.chords)
 
     @staticmethod
@@ -59,10 +59,10 @@ class Triangulation:
         return json.dumps(self.dump(), indent=4)
 
     @classmethod
-    def from_json(cls, value: str, polygon: Polygon) -> "Triangulation":
+    def from_json(cls, value: str, polygon: Polygon) -> Triangulation:
         chords = json.loads(value)
         if not isinstance(chords, list):
-            raise ValueError("A triangulation must be a JSON list of chords.")
+            raise TypeError("A triangulation must be a JSON list of chords.")
         triangulation = cls(polygon)
         for indices in chords:
             if not isinstance(indices, list) or len(indices) != 2:

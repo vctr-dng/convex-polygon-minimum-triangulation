@@ -1,4 +1,4 @@
-#%%
+# %%
 from polygon_triangulation.algorithms import (
     exhaustive_triangulations,
     minimum_exhaustive_triangulation,
@@ -9,8 +9,7 @@ from polygon_triangulation.dataset import (
     triangulation_from_entry,
 )
 
-
-#%%
+# %%
 VERTEX_COUNT = 7
 SHOW_PLOTS = True
 
