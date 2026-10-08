@@ -5,8 +5,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from .algorithms import minimum_exhaustive_triangulation
 from .geometry import Polygon, Vertex
+from .marimo.exhaustive import minimum_exhaustive_triangulation
 from .triangulation import Triangulation
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -61,5 +61,22 @@ def append_entry(entry: dict, directory: Path = DEFAULT_DATASET_DIRECTORY) -> in
     path = directory / f"{len(polygon)}.json"
     entries = load_dataset(len(polygon), directory) if path.exists() else []
     entries.append(entry)
+    path.write_text(json.dumps(entries, indent=4), encoding="utf-8")
+    return len(entries)
+
+
+def extend_dataset(
+    vertex_count: int,
+    samples: int,
+    radius: float = 5.0,
+    directory: Path = DEFAULT_DATASET_DIRECTORY,
+) -> int:
+    """Top up the file for ``vertex_count`` to ``samples`` entries, writing once."""
+
+    path = directory / f"{vertex_count}.json"
+    entries = load_dataset(vertex_count, directory) if path.exists() else []
+    while len(entries) < samples:
+        entries.append(generate_entry(vertex_count, radius))
+    directory.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(entries, indent=4), encoding="utf-8")
     return len(entries)
